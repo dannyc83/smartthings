@@ -86,7 +86,7 @@ def mainPage() {
 			input "bulbsColor", "capability.colorControl", title: "Which LIFX Bulbs?", required:false, multiple:true
 			input "color", "enum", title: "LIFX Color?", required: false, multiple:false, options: [
 				"WhiteWarm":"White (Warm)",
-				"WhiteNeutal":"White (Neutral)",
+				"WhiteNeutral":"White (Neutral)",
 				"WhiteCool":"White (Cool)",
 				"Red":"Red",
 				"Orange":"Orange",
@@ -239,8 +239,8 @@ private takeAction(evt) {
 			saturation = 10
 			break;
 		case "WhiteNeutral":
-			hueColor = 2.5
-			saturation = 5
+			hueColor = 42.5
+			saturation = 4
 			break;
 		case "WhiteCool":
 			hueColor = 57.77
