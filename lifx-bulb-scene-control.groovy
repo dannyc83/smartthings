@@ -85,10 +85,9 @@ def mainPage() {
 		section("Color Settings for LIFX Bulbs...") {
 			input "bulbsColor", "capability.colorControl", title: "Which LIFX Bulbs?", required:false, multiple:true
 			input "color", "enum", title: "LIFX Color?", required: false, multiple:false, options: [
-				"2850K":"White (Warm)",
-				"3200K":"White (Soft)",
-				"5400K":"White (Neutral)",
-				"6000K":"White (Daylight)",
+				"WhiteWarm":"White (Warm)",
+				"WhiteNeutal":"White (Neutral)",
+				"WhiteCool":"White (Cool)",
 				"Red":"Red",
 				"Orange":"Orange",
 				"Yellow":"Yellow",
@@ -98,7 +97,8 @@ def mainPage() {
 				"Cyan":"Cyan",
 				"Blue":"Blue",
 				"Purple":"Purple",
-				"Magenta":"Magenta"
+				"Magenta":"Magenta",
+				"Blacklight":"Black Light"
 			]
 			input "lightLevel", "enum", title: "Light Level?", required: false, options: [10:"10%",20:"20%",30:"30%",40:"40%",50:"50%",60:"60%",70:"70%",80:"80%",90:"90%",100:"100%"]
 		}
@@ -235,21 +235,17 @@ private takeAction(evt) {
 	def saturation = 100
 
 	switch(color) {
-		case "2850K":
-			hueColor = 8.61
-			saturation = 33
+		case "WhiteWarm":
+			hueColor = 9.72
+			saturation = 10
 			break;
-		case "3200K":
-			hueColor = 9.16
-			saturation = 12 
+		case "WhiteNeutral":
+			hueColor = 42.5
+			saturation = 4 
 			break;
-		case "5400K":
-			hueColor = 16.66
-			saturation = 5
-			break;
-		case "6000K":
-			hueColor = 0
-			saturation = 0
+		case "WhiteCool":
+			hueColor = 57.77
+			saturation = 17
 			break;
 		case "Red":
 			hueColor = 100
@@ -281,6 +277,9 @@ private takeAction(evt) {
 		case "Magenta":
 			hueColor = 87
 			break;
+		case "Blacklight":
+			hueColor = 77.5
+			break;			
 	}
 
 	state.previous = [:]
