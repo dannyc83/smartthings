@@ -97,8 +97,7 @@ def mainPage() {
 				"Cyan":"Cyan",
 				"Blue":"Blue",
 				"Purple":"Purple",
-				"Magenta":"Magenta",
-				"Blacklight":"Black Light"
+				"HotPink":"Hot Pink"
 			]
 			input "lightLevel", "enum", title: "Light Level?", required: false, options: [10:"10%",20:"20%",30:"30%",40:"40%",50:"50%",60:"60%",70:"70%",80:"80%",90:"90%",100:"100%"]
 		}
@@ -240,8 +239,8 @@ private takeAction(evt) {
 			saturation = 10
 			break;
 		case "WhiteNeutral":
-			hueColor = 42.5
-			saturation = 4 
+			hueColor = 2.5
+			saturation = 5
 			break;
 		case "WhiteCool":
 			hueColor = 57.77
@@ -251,16 +250,16 @@ private takeAction(evt) {
 			hueColor = 100
 			break;			
 		case "Orange":
-			hueColor = 11
+			hueColor = 10.5
 			break;
 		case "Yellow":
-			hueColor = 17
+			hueColor = 15
 			break;
 		case "Lime":
-			hueColor = 22
+			hueColor = 20
 			break;
 		case "Green":
-			hueColor = 35
+			hueColor = 36
 			break;
 		case "Turquoise":
 			hueColor = 42
@@ -274,12 +273,9 @@ private takeAction(evt) {
 		case "Purple":
 			hueColor = 77
 			break;
-		case "Magenta":
+		case "HotPink":
 			hueColor = 87
-			break;
-		case "Blacklight":
-			hueColor = 77.5
-			break;			
+			break;		
 	}
 
 	state.previous = [:]
