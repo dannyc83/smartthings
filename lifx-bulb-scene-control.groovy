@@ -85,12 +85,10 @@ def mainPage() {
 		section("Color Settings for LIFX Bulbs...") {
 			input "bulbsColor", "capability.colorControl", title: "Which LIFX Bulbs?", required:false, multiple:true
 			input "color", "enum", title: "LIFX Color?", required: false, multiple:false, options: [
-				"2700K":"White - 2700K (Warm)",
-				"3000K":"White - 3000K (Warm)",
-				"3500K":"White - 3500K (Neutral)",
-				"4100K":"White - 4100K (Cool)",
-				"5500K":"White - 5500K (Daylight)",
-				"6500K":"White - 6500K (Daylight)",
+				"2850K":"White (Warm)",
+				"3200K":"White (Soft)",
+				"5400K":"White (Neutral)",
+				"6000K":"White (Daylight)",
 				"Red":"Red",
 				"Orange":"Orange",
 				"Yellow":"Yellow",
@@ -237,29 +235,21 @@ private takeAction(evt) {
 	def saturation = 100
 
 	switch(color) {
-		case "2700K":
-			hueColor = 8
-			saturation = 66
+		case "2850K":
+			hueColor = 8.61
+			saturation = 33
 			break;
-		case "3000K":
-			hueColor = 8
-			saturation = 58 
+		case "3200K":
+			hueColor = 9.16
+			saturation = 12 
 			break;
-		case "3500K":
-			hueColor = 8
-			saturation = 46
+		case "5400K":
+			hueColor = 16.66
+			saturation = 5
 			break;
-		case "4100K":
-			hueColor = 8
-			saturation = 34 
-			break; 
-		case "5500K":
-        		hueColor = 6
-			saturation = 12
-			break;
-		case "6500K":
-			hueColor = 89
-			saturation = 2
+		case "6000K":
+			hueColor = 0
+			saturation = 0
 			break;
 		case "Red":
 			hueColor = 100
