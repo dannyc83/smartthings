@@ -1,10 +1,11 @@
 /**
  *  LIFX Bulb Scene Control
  *  Version: 1.0
- *  Written by Ben Koehler
+ *  Written by Ben Koehler (@triphius)
+ * 
+ *  https://github.com/triphius/smartthings/blob/master/lifx-bulb-scene-control.groovy
  *
  *  Last Updated: May 31, 2015
- *
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  *  in compliance with the License. You may obtain a copy of the License at:
@@ -14,7 +15,6 @@
  *  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed
  *  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
  *  for the specific language governing permissions and limitations under the License.
- *
  *
  *  Based on Rob Landry's (@rob_a_landry) Hue/Bulb Scenes (v1.0.2)
  *  https://github.com/roblandry/Hue-Bulb-Scenes/blob/master/hue-bulb-scenes.groovy
