@@ -26,13 +26,13 @@
  */
  
 definition(
-    name: "LIFX Bulb Scene Control",
-    namespace: "triphius",
-    author: "Ben Koehler",
-    description: "Sets the color, brightness level and state of your LIFX bulbs.",
-    category: "SmartThings Labs",
-    iconUrl: "https://d21buns5ku92am.cloudfront.net/40204/logo/small-1385905812.png",
-    iconX2Url: "https://d21buns5ku92am.cloudfront.net/40204/logo/small-1385905812.png"
+	name: "LIFX Bulb Scene Control",
+	namespace: "triphius",
+	author: "Ben Koehler",
+	description: "Sets the color, brightness level and state of your LIFX bulbs.",
+	category: "SmartThings Labs",
+	iconUrl: "https://d21buns5ku92am.cloudfront.net/40204/logo/small-1385905812.png",
+	iconX2Url: "https://d21buns5ku92am.cloudfront.net/40204/logo/small-1385905812.png"
 )
 
 preferences {
