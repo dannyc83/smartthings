@@ -304,10 +304,8 @@ private takeAction(evt) {
 	log.debug "current values = $state.previous"
 
 	def newValue = [hue: hueColor, saturation: saturation, level: lightLevel as Integer ?: 100]
-	def bulbNewValue = [level: bulbLevel as Integer ?: 100]
 
 	log.debug "new hue value = $newValue"
-	log.debug "new bulb value = $bulbNewValue.level"
 
 	bulbsColor*.setAdjustedColor(newValue)
 	bulbsOn*.on()
