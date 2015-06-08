@@ -29,7 +29,7 @@ metadata {
         capability "Refresh"
         
         command "setAdjustedColor"
-		command "setAdjustedWhite"
+	command "setAdjustedWhite"
     }
 
     simulator {
@@ -141,50 +141,60 @@ private sendAdjustedColor(data) {
     def hue = Math.ceil(data.hue*3.6)
     def saturation = data.saturation/100
     def duration = data.duration
-    
-    sendCommand("lights/"+device.deviceNetworkId+"/color", "PUT", 'color=hue%3A'+hue+'%20saturation%3A'+saturation+'&duration='+duration+'&power_on=false')
+    def level = data.level
+
+    sendCommand("lights/"+device.deviceNetworkId+"/color", "PUT", 'color=hue%3A'+hue+'%20saturation%3A'+saturation+'%20brightness%3A'+level+'%25&duration='+duration+'&power_on=false')
 }
 
 def setAdjustedColor(value) {
     def data = [:]
     data.hue = value.hue
     data.saturation = value.saturation
-    data.duration = value.duration
+    data.level = value.level
+    
+    if (value.duration) {
+		data.duration = value.duration
+    } else {
+		data.duration = 1
+	}
     
     sendAdjustedColor(data)
     sendEvent(name: 'hue', value: value.hue)
     sendEvent(name: 'saturation', value: value.saturation)
     sendEvent(name: 'duration', value: value.duration)
+    sendEvent(name: 'level', value: value.level)
 }
 
 
 private sendAdjustedWhite(data) {
     def kelvin = data.kelvin
     def duration = data.duration
+    def level = data.level
     
-    sendCommand("lights/"+device.deviceNetworkId+"/color", "PUT", 'color=kelvin%3A'+kelvin+'&duration='+duration+'&power_on=false')
+    sendCommand("lights/"+device.deviceNetworkId+"/color", "PUT", 'color=kelvin%3A'+kelvin+'%20brightness%3A'+level+'%25&duration='+duration+'&power_on=false')
 }
 
 def setAdjustedWhite(value) {
     def data = [:]
     data.kelvin = value.kelvin
     data.duration = value.duration
+    data.level = value.level
     
     sendAdjustedWhite(data)
     sendEvent(name: 'kelvin', value: value.kelvin)
     sendEvent(name: 'duration', value: value.duration)
+    sendEvent(name: 'level', value: value.level)
 }
 
-
-private sendLevel(data) {
-	def brightness = data.lev
-}
 
 def setLevel(double value) {
     def data = [:]
+    data.hue = device.currentValue("hue")
+    data.saturation = device.currentValue("saturation")
+    data.duration = 1
     data.level = value
 
-    sendLevel(data)
+    sendAdjustedColor(data)
     sendEvent(name: 'level', value: value)
 }
 

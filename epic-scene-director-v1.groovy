@@ -310,7 +310,7 @@ private takeAction(evt) {
 	def lifxSaturation = 100
 	def lifxKelvin = -1
 	def lifxPowerState = -1
-	def lifxBrightness = -1
+	def lifxBrightness = 100
 	def lifxDuration = bulbsLifxTransTime
 
 	switch(bulbsLifxColor) {
@@ -441,37 +441,30 @@ private takeAction(evt) {
 
 	state.previous = [:]
 
-	bulbsLifxSelection.each {
-		state.previous[it.id] = [
-			"switch": it.currentValue("switch"),
-			"level" : it.currentValue("level"),
-			"hue": it.currentValue("hue"),
-			"saturation": it.currentValue("saturation"),
-			"kelvin": it.currentValue("kelvin")
-		]
-	}
+	//bulbsLifxSelection.each {
+	//	state.previous[it.id] = [
+	//		"switch": it.currentValue("switch"),
+	//		"level" : it.currentValue("level"),
+	//		"hue": it.currentValue("hue"),
+	//		"saturation": it.currentValue("saturation"),
+	//		"kelvin": it.currentValue("kelvin")
+	//	]
+	//}
 
-	log.debug "Current LIFX Values = $state.previous"
+	//log.debug "Current LIFX Values = $state.previous"
 
-	def newValue = [hue: lifxHue, saturation: lifxSaturation, kelvin: lifxKelvin, level: lifxBrightness as Integer, duration: lifxDuration as Integer]
+	def newLifxValue = [hue: lifxHue, saturation: lifxSaturation, kelvin: lifxKelvin, level: lifxBrightness as Integer, duration: lifxDuration as Integer]
 
-	log.debug "New LIFX Values = $newValue"
+	log.debug "New LIFX Values = $newLifxValue"
 
 	bulbsLifxSelection.each {
 	
 		if (lifxHue != -1) {
-			def newLifxValue = [hue: lifxHue, saturation: lifxSaturation, duration: lifxDuration as Integer]
 			it.setAdjustedColor(newLifxValue)
 		}
 		
 		if (lifxKelvin != -1) {
-			def newLifxValue = [kelvin: lifxKelvin, duration: lifxDuration as Integer]
 			it.setAdjustedWhite(newLifxValue)
-		}
-		
-		if (lifxBrightness != -1) {
-			def newLifxValue = [level: lifxBrightness as Integer, duration: lifxDuration as Integer]
-			it.setLevel(newLifxValue)
 		}
 		
 		if (lifxPowerState == 1) {
