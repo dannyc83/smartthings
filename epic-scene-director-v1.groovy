@@ -19,11 +19,11 @@
  *  Based on Rob Landry's (@rob_a_landry) Hue/Bulb Scenes (v1.0.2)
  *  https://github.com/roblandry/Hue-Bulb-Scenes/blob/master/hue-bulb-scenes.groovy
  *  
- *  Designed for use with my LIFX 2.0 Enhanced Device Type, which is based on Nicolas Cerveaux's (@zzarbi) LIFX 2.0 Device Type.
+ *  Designed for use with my EPIC! LIFX Bulb Device Type, which is based on Nicolas Cerveaux's (@zzarbi) LIFX 2.0 Device Type.
  *
- *  LIFX 2.0 Enhanced Device Type	https://github.com/triphius/smartthings/blob/master/lifx2-bulb-enhanced.groovy
- *  LIFX 2.0 Device Type 		https://github.com/zzarbi/smartthings/blob/master/device/lifx/lifx-bulb-2.groovy
- *  LIFX 2.0 Connect App		https://github.com/zzarbi/smartthings/blob/master/app/lifx/lifx-connect2.groovy
+ *  EPIC! LIFX Bulb		https://github.com/triphius/smartthings/blob/master/epic-lifx-bulb.groovy
+ *  LIFX 2.0 Device Type 	https://github.com/zzarbi/smartthings/blob/master/device/lifx/lifx-bulb-2.groovy
+ *  LIFX 2.0 Connect App	https://github.com/zzarbi/smartthings/blob/master/app/lifx/lifx-connect2.groovy
  */
  
 definition(
@@ -107,9 +107,9 @@ def mainPage() {
 		// LIFX Bulbs //
 		section() {
 
-			paragraph title: "LIFX Bulbs", "Configure scene changes for LIFX Bulbs here.\n - Do not select Hue bulbs here.\n - A selection under White will override a selection in Color when processed.\n - LIFX Bulbs do not automatically power on when color/white/brightness is changed, so be sure to select your bulbs under the 'Turn On' section."
+			paragraph title: "LIFX Bulbs", image: "https://d21buns5ku92am.cloudfront.net/40204/logo/small-1385905812.png", "Configure scene changes for LIFX bulbs here."
 			
-			input "bulbsLifxSelection", "capability.colorControl", title: "Which LIFX Bulbs?", required: false, multiple: true
+			input "bulbsLifxSelection", "capability.colorControl", title: "Select LIFX Bulbs", required: false, multiple: true
 			
 			input "bulbsLifxColor", "enum", title: "Set Color", required: false, multiple: false, options: [
 				"Red":"Red",
@@ -134,31 +134,34 @@ def mainPage() {
 			]
 
 			input "bulbsLifxBrightness", "enum", title: "Set Brightness", required: false, options: [
-				5:"5%",
-				10:"10%",
-				15:"15%",
-				20:"20%",
-				25:"25%",
-				30:"30%",
-				35:"35%",
-				40:"40%",
-				45:"45%",
-				50:"50%",
-				55:"55%",
-				60:"60%",
-				65:"65%",
-				70:"70%",
-				75:"75%",
-				80:"80%",
-				85:"85%",
-				90:"90%",
-				95:"95%",
-				100:"100%"
+				"5":"5%",
+				"10":"10%",
+				"15":"15%",
+				"20":"20%",
+				"25":"25%",
+				"30":"30%",
+				"35":"35%",
+				"40":"40%",
+				"45":"45%",
+				"50":"50%",
+				"55":"55%",
+				"60":"60%",
+				"65":"65%",
+				"70":"70%",
+				"75":"75%",
+				"80":"80%",
+				"85":"85%",
+				"90":"90%",
+				"95":"95%",
+				"100":"100%"
+			]
+
+			input "bulbsLifxPowerState", "enum", title: "Set Power State", required: false, options: [
+				"on":"Turn On",
+				"off":"Turn Off",
 			]
 			
-			input "bulbsLifxOn", "capability.switch", title: "Turn On", required: false, multiple: true
-
-			input "bulbsLifxOff", "capability.switch", title: "Turn Off", required: false, multiple: true
+			input "bulbsLifxTransTime", "number", title: "Set Transition Time (in seconds)", required: true, defaultValue: "1"
 			
 		}
 
@@ -301,11 +304,14 @@ private takeAction(evt) {
 	}
 
 
-	// Configure LIFX Actions //
+	// LIFX Actions //
 	
-	def lifxHue = 0
+	def lifxHue = -1
 	def lifxSaturation = 100
-	def lifxKelvin = 0
+	def lifxKelvin = -1
+	def lifxPowerState = -1
+	def lifxBrightness = -1
+	def lifxDuration = bulbsLifxTransTime
 
 	switch(bulbsLifxColor) {
 		case "Red":
@@ -361,8 +367,77 @@ private takeAction(evt) {
 			break;	
 	}
 	
+	switch(bulbsLifxBrightness) {
+		case "5":
+			lifxBrightness = 5
+			break;
+		case "10":
+			lifxBrightness = 10
+			break;
+		case "15":
+			lifxBrightness = 15
+			break;
+		case "20":
+			lifxBrightness = 20
+			break;
+		case "25":
+			lifxBrightness = 25
+			break;
+		case "30":
+			lifxBrightness = 30
+			break;
+		case "35":
+			lifxBrightness = 35
+			break;
+		case "40":
+			lifxBrightness = 40
+			break;
+		case "45":
+			lifxBrightness = 45
+			break;
+		case "50":
+			lifxBrightness = 50
+			break;
+		case "55":
+			lifxBrightness = 55
+			break;
+		case "60":
+			lifxBrightness = 60
+			break;
+		case "65":
+			lifxBrightness = 65
+			break;
+		case "70":
+			lifxBrightness = 70
+			break;
+		case "75":
+			lifxBrightness = 75
+			break;
+		case "80":
+			lifxBrightness = 80
+			break;
+		case "85":
+			lifxBrightness = 85
+			break;
+		case "90":
+			lifxBrightness = 90
+			break;
+		case "95":
+			lifxBrightness = 95
+			break;
+		case "100":
+			lifxBrightness = 100
+			break;
+	}
 	
-	// Execute LIFX Actions //
+	switch(bulbsLifxPowerState) {
+		case "on":
+			lifxPowerState = 1
+			break;			
+		case "off":
+			lifxPowerState = 0
+			break;
+	}	
 
 	state.previous = [:]
 
@@ -376,28 +451,38 @@ private takeAction(evt) {
 		]
 	}
 
-	bulbsLifxOn.each {
-		state.previous[it.id] = [
-			"switch": it.currentValue("switch")
-		]
-	}
-
-	bulbsLifxOff.each {
-		state.previous[it.id] = [
-			"switch": it.currentValue("switch")
-        	]
-    	}
-
 	log.debug "Current LIFX Values = $state.previous"
 
-	def newValue = [hue: lifxHue, saturation: lifxSaturation, kelvin: lifxKelvin, level: bulbsLifxBrightness as Integer ?: 100]
+	def newValue = [hue: lifxHue, saturation: lifxSaturation, kelvin: lifxKelvin, level: lifxBrightness as Integer, duration: lifxDuration as Integer]
 
 	log.debug "New LIFX Values = $newValue"
 
-	bulbsLifxColor*.setAdjustedColor(newValue)
-	bulbsLifxWhite*.setAdjustedWhite(newValue)
-	bulbsLifxOn*.on()
-	bulbsLifxOff*.off()
+	bulbsLifxSelection.each {
+	
+		if (lifxHue != -1) {
+			def newLifxValue = [hue: lifxHue, saturation: lifxSaturation, duration: lifxDuration as Integer]
+			it.setAdjustedColor(newLifxValue)
+		}
+		
+		if (lifxKelvin != -1) {
+			def newLifxValue = [kelvin: lifxKelvin, duration: lifxDuration as Integer]
+			it.setAdjustedWhite(newLifxValue)
+		}
+		
+		if (lifxBrightness != -1) {
+			def newLifxValue = [level: lifxBrightness as Integer, duration: lifxDuration as Integer]
+			it.setLevel(newLifxValue)
+		}
+		
+		if (lifxPowerState == 1) {
+			it.on()
+		}
+		
+		if (lifxPowerState == 0) {
+			it.off()
+		}
+	
+	}
     
 }
 
