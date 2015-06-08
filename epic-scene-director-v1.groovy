@@ -441,17 +441,17 @@ private takeAction(evt) {
 
 	state.previous = [:]
 
-	//bulbsLifxSelection.each {
-	//	state.previous[it.id] = [
-	//		"switch": it.currentValue("switch"),
-	//		"level" : it.currentValue("level"),
-	//		"hue": it.currentValue("hue"),
-	//		"saturation": it.currentValue("saturation"),
-	//		"kelvin": it.currentValue("kelvin")
-	//	]
-	//}
+	bulbsLifxSelection.each {
+		state.previous[it.id] = [
+			"switch": it.currentValue("switch"),
+			"level" : it.currentValue("level"),
+			"hue": it.currentValue("hue"),
+			"saturation": it.currentValue("saturation"),
+			"kelvin": it.currentValue("kelvin")
+		]
+    }
 
-	//log.debug "Current LIFX Values = $state.previous"
+	log.debug "Current LIFX Values = $state.previous"
 
 	def newLifxValue = [hue: lifxHue, saturation: lifxSaturation, kelvin: lifxKelvin, level: lifxBrightness as Integer, duration: lifxDuration as Integer]
 
