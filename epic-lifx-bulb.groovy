@@ -1,7 +1,11 @@
-/**
- *  Lifx Http
+/*
+ *  EPIC! LIFX Bulb
+ *  Version: 1.0
+ *  Written by Ben Koehler (@triphius)
+ * 
+ *  https://github.com/triphius/smartthings/blob/master/epic-lifx-bulb.groovy
  *
- *  Copyright 2014 Nicolas Cerveaux
+ *  Last Updated: June 7, 2015
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  *  in compliance with the License. You may obtain a copy of the License at:
@@ -12,10 +16,12 @@
  *  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
  *  for the specific language governing permissions and limitations under the License.
  *
+ *  Based on Nicolas Cerveaux's (@zzarbi) LIFX 2.0 Device Type
+ *  https://github.com/zzarbi/smartthings/blob/master/device/lifx/lifx-bulb-2.groovy
  */
 
 metadata {
-    definition (name: "LIFX Bulb", namespace: "lifx", author: "Nicolas Cerveaux") {
+    definition (name: "EPIC! LIFX Bulb", namespace: "triphius", author: "Ben Koehler") {
         capability "Polling"
         capability "Switch"
         capability "Switch Level"
@@ -23,7 +29,7 @@ metadata {
         capability "Refresh"
         
         command "setAdjustedColor"
-	command "setAdjustedWhite"
+		command "setAdjustedWhite"
     }
 
     simulator {
