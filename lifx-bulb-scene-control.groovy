@@ -60,7 +60,6 @@ def mainPage() {
 				ifSet "departurePresence", "capability.presenceSensor", title: "Departure Of", required: false, multiple: true
 				ifSet "smoke", "capability.smokeDetector", title: "Smoke Detected", required: false, multiple: true
 				ifSet "water", "capability.waterSensor", title: "Water Sensor Wet", required: false, multiple: true
-				ifSet "button1", "capability.button", title: "Button Press", required:false, multiple:true //remove from production
 				ifSet "triggerModes", "mode", title: "System Changes Mode", required: false, multiple: true
 				ifSet "timeOfDay", "time", title: "At a Scheduled Time", required: false
 			}
@@ -76,7 +75,6 @@ def mainPage() {
 			ifUnset "departurePresence", "capability.presenceSensor", title: "Departure Of", required: false, multiple: true
 			ifUnset "smoke", "capability.smokeDetector", title: "Smoke Detected", required: false, multiple: true
 			ifUnset "water", "capability.waterSensor", title: "Water Sensor Wet", required: false, multiple: true
-			ifUnset "button1", "capability.button", title: "Button Press", required:false, multiple:true //remove from production
 			ifUnset "triggerModes", "mode", title: "System Changes Mode", description: "Select mode(s)", required: false, multiple: true
 			ifUnset "timeOfDay", "time", title: "At a Scheduled Time", required: false
 		}
@@ -175,7 +173,6 @@ def subscribeToEvents() {
 	subscribe(smoke, "smoke.tested", eventHandler)
 	subscribe(smoke, "carbonMonoxide.detected", eventHandler)
 	subscribe(water, "water.wet", eventHandler)
-	subscribe(button1, "button.pushed", eventHandler)
 
 	if (triggerModes) {
 		subscribe(location, modeChangeHandler)
